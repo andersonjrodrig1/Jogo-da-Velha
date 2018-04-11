@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Design.h" />
     <ClInclude Include="Jogo.h" />
+    <ClInclude Include="Logica.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClCompile Include="Design.cpp" />
     <ClCompile Include="Jogo da Velha.cpp" />
     <ClCompile Include="Jogo.cpp" />
+    <ClCompile Include="Logica.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
