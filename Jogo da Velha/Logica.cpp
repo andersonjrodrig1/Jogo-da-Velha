@@ -16,23 +16,40 @@ Logica::Logica() { }
 Logica::~Logica() { }
 
 void Logica::Jogar() {
-	system("cls");
+	bool temVencedor;
+	int linha, coluna, jogadorAtual;
+	char valor;
+	int teste = 0;
 
-	Design design;
-	design.ExibirMensagemPrincipal();
-	ExibirTabuleiro();
+	temVencedor = false;
+	jogadorAtual = 1;
+	valor = 'x';
 
-	system("pause");
+	while (teste < 3) {
+		system("cls");
 
+		Design design;
+		design.ExibirMensagemPrincipal();
+		ExibirTabuleiro();
+
+		cout << "\n\nJogador: " << jogadorAtual << endl;
+		cout << "Informa a linha para iniciar a jogada: ";
+		cin >> linha;
+		cout << "Informa a coluna para encerrar a jogada: ";
+		cin >> coluna;
+
+		RealizarJogada(linha, coluna, valor);
+		teste++;
+	}
 }
 
 void Logica::ExibirTabuleiro() {
 	int cont;
 
-	cout << "-  0   1   2 \n";
+	cout << "\t\t\t-   0   1   2 \n\n";
 	for (int i = 0; i < linha; i++) {
 		cont = 0;
-		cout << i << " ";
+		cout << "\t\t\t" << i << "  ";
 
 		for (int j = 0; j < colunaVet; j++) {
 			if (j % 2 != 0) {
@@ -51,11 +68,11 @@ void Logica::ExibirTabuleiro() {
 		}
 
 		if (i < linha - 1) {
-			cout << "\n  - - - - - -\n";
+			cout << "\n\t\t\t   - - - - - -\n";
 		}
 	}
 }
 
-void Logica::RealizarJogada(int linha, int coluna) {
-	tabuleiro[linha][coluna] = 'x';
+void Logica::RealizarJogada(int linha, int coluna, char valor) {
+	tabuleiro[linha][coluna] = valor;
 }

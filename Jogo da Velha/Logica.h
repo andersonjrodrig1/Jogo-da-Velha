@@ -6,6 +6,6 @@ class Logica
 		~Logica();
 		void Jogar();
 		void ExibirTabuleiro();
-		void RealizarJogada(int linha, int coluna);
+		void RealizarJogada(int linha, int coluna, char valor);
 };
 

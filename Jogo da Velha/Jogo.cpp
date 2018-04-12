@@ -1,11 +1,11 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-#include <conio.h>
 #include "stdafx.h"
 #include "Jogo.h"
 #include "Logica.h"
 #include "Design.h"
+#include <conio.h>
 
 using namespace std;
 
