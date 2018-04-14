@@ -7,72 +7,145 @@
 
 using namespace std;
 
-const int linha = 3, coluna = 3;
-const int colunaVet = 5;
-char tabuleiro[linha][coluna];
+const int JOGADOR_UM = 1;
+const int JOGADOR_DOIS = 2;
+const int LINHA = 3, COLUNA = 3;
+const int COLUNA_VET = 5;
+const char VALOR_JOGADOR_UM = 'X';
+const char VALOR_JOGADOR_DOIS = 'O';
+
+char tabuleiro[LINHA][COLUNA];
 
 Logica::Logica() { }
 
 Logica::~Logica() { }
 
 void Logica::Jogar() {
-	bool temVencedor;
+	Design design;
+
+	bool isVencedor, isJogadaValida, isTabuleiroCheio, isFimJogo;
 	int linha, coluna, jogadorAtual;
 	char valor;
-	int teste = 0;
 
-	temVencedor = false;
-	jogadorAtual = 1;
-	valor = 'x';
+	isVencedor = false;
+	isFimJogo = false;
+	isTabuleiroCheio = false;
+	isJogadaValida = true;
+	jogadorAtual = JOGADOR_UM;
+	valor = VALOR_JOGADOR_UM;
 
-	while (teste < 3) {
-		system("cls");
+	while (!isFimJogo && !isTabuleiroCheio) {
+		do {
+			system("cls");
 
-		Design design;
-		design.ExibirMensagemPrincipal();
-		ExibirTabuleiro();
+			design.ExibirTabuleiro(tabuleiro);
 
-		cout << "\n\nJogador: " << jogadorAtual << endl;
-		cout << "Informa a linha para iniciar a jogada: ";
-		cin >> linha;
-		cout << "Informa a coluna para encerrar a jogada: ";
-		cin >> coluna;
+			cout << "\n\nJogador: " << jogadorAtual << endl;
+			cout << "Informa a linha para iniciar a jogada: ";
+			cin >> linha;
+			cout << "Informa a coluna para encerrar a jogada: ";
+			cin >> coluna;
 
-		RealizarJogada(linha, coluna, valor);
-		teste++;
+			isJogadaValida = IsJogadaValida(linha, coluna);
+
+			if (!isJogadaValida) {
+				char mensagem[] = "Jogada invalida. Tente novamente...";
+				design.ExibirMensagemExcecao(mensagem);
+			}
+		} while (!isJogadaValida);
+
+		RegistrarJogada(linha, coluna, valor);
+		isFimJogo = IsFimJogo(valor);
+		isTabuleiroCheio = IsTabuleiroCheio();
+
+		if (!isFimJogo && !isTabuleiroCheio) {
+			if (jogadorAtual == JOGADOR_UM) {
+				jogadorAtual = JOGADOR_DOIS;
+				valor = VALOR_JOGADOR_DOIS;
+			} else {
+				jogadorAtual = JOGADOR_UM;
+				valor = VALOR_JOGADOR_UM;
+			}
+		} else {
+			system("cls");
+			design.ExibirTabuleiro(tabuleiro);
+
+			if (isTabuleiroCheio) {
+				design.ExibirMensagemEmpate();
+			}
+
+			if (isFimJogo) {
+				design.ExibirMensagemVencendor(jogadorAtual);
+			}
+		}
 	}
 }
 
-void Logica::ExibirTabuleiro() {
-	int cont;
+void Logica::RegistrarJogada(int linha, int coluna, char valor) {
+	tabuleiro[linha][coluna] = valor;
+}
 
-	cout << "\t\t\t-   0   1   2 \n\n";
-	for (int i = 0; i < linha; i++) {
-		cont = 0;
-		cout << "\t\t\t" << i << "  ";
+bool Logica::IsJogadaValida(int linha, int coluna) {
+	if (tabuleiro[linha][coluna] == NULL) {
+		return true;
+	}
 
-		for (int j = 0; j < colunaVet; j++) {
-			if (j % 2 != 0) {
-				cout << "|";
-			}
-			else {
-				if (tabuleiro[i][cont] == NULL)
-					cout << "   ";
-				else {
-					char texto = tabuleiro[i][cont];
-					cout << " " << texto << " ";
-				}
+	return false;
+}
 
+bool Logica::IsFimJogo(char valor) {
+	if (tabuleiro[0][0] == valor && tabuleiro[0][1] == valor && tabuleiro[0][2] == valor) {
+		return true;
+	}
+	
+	if (tabuleiro[1][0] == valor && tabuleiro[1][1] == valor && tabuleiro[1][2] == valor) {
+		return true;
+	}
+
+	if (tabuleiro[2][0] == valor && tabuleiro[2][1] == valor && tabuleiro[2][2] == valor) {
+		return true;
+	}
+
+	if (tabuleiro[0][0] == valor && tabuleiro[1][0] == valor && tabuleiro[2][0] == valor) {
+		return true;
+	}
+
+	if (tabuleiro[0][1] == valor && tabuleiro[1][1] == valor && tabuleiro[2][1] == valor) {
+		return true;
+	}
+
+	if (tabuleiro[0][2] == valor && tabuleiro[1][2] == valor && tabuleiro[2][2] == valor) {
+		return true;
+	}
+
+	if (tabuleiro[0][0] == valor && tabuleiro[1][1] == valor && tabuleiro[2][2] == valor) {
+		return true;
+	}
+
+	if (tabuleiro[0][2] == valor && tabuleiro[1][1] == valor && tabuleiro[2][0] == valor) {
+		return true;
+	}
+
+	return false;
+}
+
+bool Logica::IsTabuleiroCheio() {
+	int cont = 0;
+	int ttlColunasTabuleiro = 0;
+
+	for (int i = 0; i < LINHA; i++) {
+		for (int j = 0; j < COLUNA; j++) {
+			if (tabuleiro[i][j] != NULL) {
 				cont++;
 			}
 		}
-
-		if (i < linha - 1) {
-			cout << "\n\t\t\t   - - - - - -\n";
-		}
 	}
-}
 
-void Logica::RealizarJogada(int linha, int coluna, char valor) {
-	tabuleiro[linha][coluna] = valor;
+	ttlColunasTabuleiro = LINHA * COLUNA;
+
+	if (ttlColunasTabuleiro == cont) {
+		return true;
+	}
+
+	return false;
 }

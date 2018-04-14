@@ -5,7 +5,9 @@ class Logica
 		Logica();
 		~Logica();
 		void Jogar();
-		void ExibirTabuleiro();
-		void RealizarJogada(int linha, int coluna, char valor);
+		void RegistrarJogada(int linha, int coluna, char valor);
+		bool IsJogadaValida(int linha, int coluna);
+		bool IsFimJogo(char valor);
+		bool IsTabuleiroCheio();
 };
 
