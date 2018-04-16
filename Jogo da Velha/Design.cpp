@@ -56,8 +56,8 @@ void Design::ExibirApresentacao() {
 	cout << "2 - Jogador 1 joga com x" << endl;
 	cout << "3 - Jogador 2 joga com o" << endl;
 	cout << "4 - Vence quem fizer a sequencia de 3 elementos seguidos" << endl;
-	cout << "\nPresione qualquer techa para jogar";
-	cout << "\nPresione zero para sair: ";
+	cout << "\nPresione qualquer techa para jogar ou zero para sair" << endl;
+	cout << "Presione enter para prosseguir: ";
 }
 
 void Design::ExibirEncerramento() {
