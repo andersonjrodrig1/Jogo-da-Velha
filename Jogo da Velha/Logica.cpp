@@ -31,7 +31,7 @@ void Logica::Jogar() {
 	while (!isFimJogo && !isTabuleiroCheio) {
 		do {
 			system("cls");
-
+			isJogadaValida = true;
 			design.ExibirTabuleiro(tabuleiro);
 
 			cout << "\n\nJogador: " << jogadorAtual << endl;
@@ -39,8 +39,6 @@ void Logica::Jogar() {
 			cin >> linha;
 			cout << "Informa a coluna para encerrar a jogada: ";
 			cin >> coluna;
-
-			isJogadaValida = true;
 
 			if (linha >= LINHA || coluna >= COLUNA) {
 				isJogadaValida = false;
