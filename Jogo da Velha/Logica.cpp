@@ -7,13 +7,8 @@
 
 using namespace std;
 
-const int JOGADOR_UM = 1;
-const int JOGADOR_DOIS = 2;
-const int LINHA = 3, COLUNA = 3;
-const int COLUNA_VET = 5;
-const char VALOR_JOGADOR_UM = 'X';
-const char VALOR_JOGADOR_DOIS = 'O';
-
+const int JOGADOR_UM = 1, JOGADOR_DOIS = 2, LINHA = 3, COLUNA = 3;
+const char VALOR_JOGADOR_UM = 'X', VALOR_JOGADOR_DOIS = 'O';
 char tabuleiro[LINHA][COLUNA];
 
 Logica::Logica() { }
@@ -30,7 +25,6 @@ void Logica::Jogar() {
 	isVencedor = false;
 	isFimJogo = false;
 	isTabuleiroCheio = false;
-	isJogadaValida = true;
 	jogadorAtual = JOGADOR_UM;
 	valor = VALOR_JOGADOR_UM;
 
@@ -46,7 +40,15 @@ void Logica::Jogar() {
 			cout << "Informa a coluna para encerrar a jogada: ";
 			cin >> coluna;
 
-			isJogadaValida = IsJogadaValida(linha, coluna);
+			isJogadaValida = true;
+
+			if (linha >= LINHA || coluna >= COLUNA) {
+				isJogadaValida = false;
+			}
+
+			if (isJogadaValida) {
+				isJogadaValida = IsJogadaValida(linha, coluna);
+			}			
 
 			if (!isJogadaValida) {
 				char mensagem[] = "Jogada invalida. Tente novamente...";

@@ -15,20 +15,15 @@ Jogo::~Jogo() { }
 
 void Jogo::IniciarJogo() {
 	char op;
-
 	Logica logica;
 	Design design;
 
-	design.ExibirApresentacao();
+	do {
+		design.ExibirApresentacao();
+		cin >> op;
 
-	cin >> op;
-
-	if (op != '0') {
-		logica.Jogar();
-	} else {
-		system("cls");
-		design.ExibirEncerramento();
-		system("pause");
-		exit(0);
-	}
+		if (op != '0') {
+			logica.Jogar();
+		}
+	} while (op != '0');
 }

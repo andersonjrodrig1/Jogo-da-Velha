@@ -7,8 +7,7 @@
 
 using namespace std;
 
-const int LINHA = 3, COLUNA = 3;
-const int COLUNA_VET = 5;
+const int LINHA = 3, COLUNA = 3, COLUNA_VET = 5;
 
 Design::Design() { }
 
@@ -50,6 +49,7 @@ void Design::ExibirMensagemPrincipal() {
 }
 
 void Design::ExibirApresentacao() {
+	system("cls");
 	cout << "\t\t*********** Jogo da Velha ************\n\n";
 	cout << "Bem vindo ao Jogo da Velha\n" << endl;
 	cout << "1 - Dois jogadores" << endl;
